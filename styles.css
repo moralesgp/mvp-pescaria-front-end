@@ -1,0 +1,252 @@
+
+/* Configurações gerais da página */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #111827;
+    color: #F3F4F6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho da aplicação */
+header {
+    background-color: #0B1120;
+    border-bottom: 2px solid #F97316;
+    padding: 30px 20px;
+}
+
+.title {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.title h1 {
+    color: #F97316;
+    font-size: 32px;
+    margin: 0;
+}
+
+.title p {
+    color: #9CA3AF;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Área principal da aplicação */
+main {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    flex: 1;
+}
+
+/* Seções da página */
+section {
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Área de busca de peixes */
+.search {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.search label {
+    display: block;
+    margin-bottom: 10px;
+    color: #D1D5DB;
+}
+
+.search input {
+    width: 75%;
+    margin-right: 8px;
+}
+
+/* Campos de entrada de dados */
+input,
+textarea {
+    background-color: #111827;
+    color: #F3F4F6;
+    border: 1px solid #4B5563;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+input::placeholder {
+    color: #9CA3AF;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid #F97316;
+    border-color: #F97316;
+}
+
+/* Botões da aplicação */
+button {
+    background-color: #F97316;
+    color: #111827;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FB923C;
+}
+
+button:focus-visible {
+    outline: 2px solid #F3F4F6;
+    outline-offset: 3px;
+}
+
+/* Organização dos resultados da busca */
+#fishList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+}
+
+/* Cards dos peixes e relatos */
+.fish-card,
+.report-card {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.fish-card h3,
+.report-card h3 {
+    color: #F97316;
+    margin-top: 0;
+}
+
+.fish-card p,
+.report-card p {
+    color: #D1D5DB;
+    line-height: 1.6;
+}
+
+/* Detalhes do peixe selecionado */
+#fishDetails {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+#fishInfo {
+    line-height: 1.6;
+}
+
+/* Relatos de pescarias */
+#addReportBtn {
+    margin-bottom: 20px;
+}
+
+#reportList {
+    display: grid;
+    gap: 15px;
+}
+
+/* Botão de exclusão dos relatos */
+.delete-btn {
+    background-color: transparent;
+    color: #F87171;
+    border: 1px solid #F87171;
+}
+
+.delete-btn:hover {
+    background-color: #7F1D1D;
+    color: #FFFFFF;
+}
+
+/* Formulário de cadastro de relato */
+#reportFormSection {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+#reportForm label {
+    display: block;
+    margin-bottom: 8px;
+    color: #D1D5DB;
+}
+
+#reportForm input,
+#reportForm textarea {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+#reportForm textarea {
+    resize: vertical;
+}
+
+#cancelBtn {
+    background-color: #374151;
+    color: #F3F4F6;
+}
+
+#cancelBtn:hover {
+    background-color: #4B5563;
+}
+
+/* Controle das seções ocultas */
+[hidden] {
+    display: none !important;
+}
+
+/* Rodapé da aplicação */
+footer {
+    background-color: #0B1120;
+    border-top: 1px solid #374151;
+    color: #9CA3AF;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+}
+
+/* Adaptação para dispositivos móveis */
+@media (max-width: 600px) {
+    .title h1 {
+        font-size: 26px;
+    }
+
+    .search input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+
+    .search button {
+        width: 100%;
+    }
+
+    main {
+        padding: 20px 15px;
+    }
+}
