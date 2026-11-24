@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Guia do Pescador</title>
+</head>
+<body>
+
+    <!-- Cabeçalho da aplicação -->
+    <header>
+        <div class="title">
+            <h1>Guia do Pescador</h1>
+            <p>Conheça os peixes e compartilhe suas experiências.</p>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Busca de peixes -->
+        <section class="search">
+            <h2>Encontre seu peixe</h2>
+
+            <label for="searchInput">Nome do peixe:</label>
+            <input type="text" id="searchInput"
+                   placeholder="Digite o nome do peixe">
+
+            <button id="searchBtn" type="button">Buscar</button>
+        </section>
+
+        <!-- Resultados da busca -->
+        <section id="searchResults">
+            <h2>Resultados da busca</h2>
+            <div id="fishList"></div>
+        </section>
+
+        <!-- Detalhes do peixe selecionado -->
+        <section id="fishDetails" hidden>
+            <h2>Sobre o peixe</h2>
+            <div id="fishInfo"></div>
+        </section>
+
+        <!-- Relatos associados ao peixe selecionado -->
+        <section id="fishingReports" hidden>
+            <h2>Relatos de pescarias</h2>
+
+            <button id="addReportBtn" type="button">
+                + Cadastrar relato
+            </button>
+
+            <div id="reportList"></div>
+        </section>
+
+        <!-- Formulário de cadastro de relato -->
+        <section id="reportFormSection" hidden>
+            <h2>Cadastrar relato</h2>
+
+            <form id="reportForm">
+
+                <label for="fisherName">Nome do pescador:</label>
+                <input type="text" id="fisherName" required>
+
+                <label for="fishingDate">Data da pescaria:</label>
+                <input type="date" id="fishingDate" required>
+
+                <label for="fishingLocation">Local:</label>
+                <input type="text" id="fishingLocation" required>
+
+                <label for="baitUsed">Isca utilizada:</label>
+                <input type="text" id="baitUsed" required>
+
+                <label for="observation">Observações:</label>
+                <textarea id="observation" rows="4"></textarea>
+
+                <button type="submit">Salvar relato</button>
+
+                <button id="cancelBtn" type="button">
+                    Cancelar
+                </button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Rodapé da aplicação -->
+    <footer>
+        <p>Guia do Pescador | MVP Full Stack Básico - PUC-Rio</p>
+    </footer>
+
+    <!-- Arquivo JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>
