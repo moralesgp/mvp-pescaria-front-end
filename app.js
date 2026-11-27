@@ -13,8 +13,30 @@ const fishInfo = document.getElementById("fishInfo");
 const fishingReports = document.getElementById("fishingReports");
 const reportList = document.getElementById("reportList");
 
+// Elementos HTML utilizados no cadastro de relatos
+const addReportBtn = document.getElementById("addReportBtn");
+const reportFormSection = document.getElementById("reportFormSection");
+const reportForm = document.getElementById("reportForm");
+const cancelBtn = document.getElementById("cancelBtn");
+
+// Armazena o ID do peixe selecionado
+let peixeSelecionado = null;
+
 // Executa a busca ao clicar no botão
 searchBtn.addEventListener("click", buscarPeixes);
+
+// Abre o formulário de cadastro
+addReportBtn.addEventListener("click", () => {
+    if (peixeSelecionado !== null) {
+        reportFormSection.hidden = false;
+    }
+});
+
+// Cancela o cadastro do relato
+cancelBtn.addEventListener("click", () => {
+    reportForm.reset();
+    reportFormSection.hidden = true;
+});
 
 // Consulta os peixes cadastrados na API
 async function buscarPeixes() {
@@ -27,6 +49,10 @@ async function buscarPeixes() {
 
     fishingReports.hidden = true;
     reportList.textContent = "";
+    // Reinicia o formulário e a seleção do peixe
+    reportFormSection.hidden = true;
+    reportForm.reset();
+    peixeSelecionado = null;
 
     try {
         const response = await fetch(
@@ -90,6 +116,10 @@ card.appendChild(botao);
 async function detalharPeixe(idPeixe) {
     fishDetails.hidden = true;
     fishInfo.textContent = "";
+    // Limpa a seleção e o formulário anteriores
+    peixeSelecionado = null;
+    reportFormSection.hidden = true;
+    reportForm.reset();
 
     try {
         const response = await fetch(
@@ -101,6 +131,8 @@ async function detalharPeixe(idPeixe) {
         }
 
         const peixe = await response.json();
+        // Armazena o ID do peixe consultado
+        peixeSelecionado = peixe.id_peixe;
 
         const detalhes = [
             ["Nome", peixe.nome_peixe],
