@@ -38,6 +38,9 @@ cancelBtn.addEventListener("click", () => {
     reportFormSection.hidden = true;
 });
 
+ // Captura o envio do formulário de cadastro
+    reportForm.addEventListener("submit", cadastrarPescaria);
+
 // Consulta os peixes cadastrados na API
 async function buscarPeixes() {
     const nome = searchInput.value.trim();
@@ -228,6 +231,59 @@ function exibirPescarias(pescarias) {
 
         reportList.appendChild(card);
     });
+
 }
+
+// Cadastra um novo relato de pescaria
+async function cadastrarPescaria(event) {
+    event.preventDefault();
+
+    if (peixeSelecionado === null) {
+        return;
+    }
+
+    // Armazena o ID do peixe associado ao relato
+    const idPeixe = peixeSelecionado;
+
+    // Captura os dados preenchidos no formulário
+    const pescaria = {
+        id_peixe: idPeixe,
+        nome_pescador: document.getElementById("fisherName").value.trim(),
+        data: document.getElementById("fishingDate").value,
+        local: document.getElementById("fishingLocation").value.trim(),
+        isca_utilizada: document.getElementById("baitUsed").value.trim(),
+        observacao: document.getElementById("observation").value.trim()
+    };
+
+    try {
+        // Envia os dados para a API
+        const response = await fetch(`${API_URL}/pescarias`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(pescaria)
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao cadastrar relato.");
+        }
+
+        // Atualiza a tela se o mesmo peixe continuar selecionado
+        if (peixeSelecionado === idPeixe) {
+            reportForm.reset();
+            reportFormSection.hidden = true;
+
+            await listarPescarias(idPeixe);
+        }
+
+        alert("Relato cadastrado com sucesso!");
+
+    } catch (erro) {
+        alert("Não foi possível cadastrar o relato.");
+        console.error(erro);
+    }
+}
+
 
 
