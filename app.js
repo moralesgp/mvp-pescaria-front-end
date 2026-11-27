@@ -38,8 +38,8 @@ cancelBtn.addEventListener("click", () => {
     reportFormSection.hidden = true;
 });
 
- // Captura o envio do formulário de cadastro
-    reportForm.addEventListener("submit", cadastrarPescaria);
+// Captura o envio do formulário de cadastro
+reportForm.addEventListener("submit", cadastrarPescaria);
 
 // Consulta os peixes cadastrados na API
 async function buscarPeixes() {
@@ -101,15 +101,15 @@ function exibirPeixes(peixes) {
         card.appendChild(titulo);
         card.appendChild(tipoAgua);
 
-// Botão para consultar os detalhes do peixe
-const botao = document.createElement("button");
-botao.textContent = "Ver detalhes";
+        // Botão para consultar os detalhes do peixe
+        const botao = document.createElement("button");
+        botao.textContent = "Ver detalhes";
 
-botao.addEventListener("click", () => {
-    detalharPeixe(peixe.id_peixe);
-});
+        botao.addEventListener("click", () => {
+            detalharPeixe(peixe.id_peixe);
+        });
 
-card.appendChild(botao);
+        card.appendChild(botao);
         fishList.appendChild(card);
     });
 }
@@ -155,7 +155,7 @@ async function detalharPeixe(idPeixe) {
 
             fishInfo.appendChild(paragrafo);
         });
-        
+
         fishDetails.hidden = false;
         // Consulta os relatos associados ao peixe
         await listarPescarias(idPeixe);
@@ -229,6 +229,16 @@ function exibirPescarias(pescarias) {
             card.appendChild(paragrafo);
         });
 
+        // Botão para excluir o relato de pescaria
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Excluir relato";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.type = "button";
+        // Executa a exclusão do relato selecionado
+        deleteBtn.addEventListener("click", () => {
+            excluirPescaria(pescaria.id_pescaria);
+        });
+        card.appendChild(deleteBtn);
         reportList.appendChild(card);
     });
 
@@ -285,5 +295,41 @@ async function cadastrarPescaria(event) {
     }
 }
 
+// Exclui um relato de pescaria
+async function excluirPescaria(idPescaria) {
+    const confirmado = confirm(
+        "Deseja realmente excluir este relato?"
+    );
+
+    if (!confirmado) {
+        return;
+    }
+
+    const idPeixe = peixeSelecionado;
+
+    try {
+        const response = await fetch(
+            `${API_URL}/pescarias/${idPescaria}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao excluir relato.");
+        }
+
+        // Atualiza os relatos do peixe selecionado
+        if (peixeSelecionado === idPeixe) {
+            await listarPescarias(idPeixe);
+        }
+
+        alert("Relato excluído com sucesso!");
+
+    } catch (erro) {
+        alert("Não foi possível excluir o relato.");
+        console.error(erro);
+    }
+}
 
 

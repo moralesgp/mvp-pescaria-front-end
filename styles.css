@@ -250,3 +250,14 @@ footer {
         padding: 20px 15px;
     }
 }
+
+/* Botão de exclusão de relatos */
+.delete-btn {
+    background-color: #dc2626;
+    color: #ffffff;
+    margin-top: 12px;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c;
+}
